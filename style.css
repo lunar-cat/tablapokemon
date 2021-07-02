@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+body {
+    font-size: x-large;
+    font-family: 'Nunito', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    background-color: hsl(0, 0%, 35%);
+    display: grid;
+    grid-template-areas: 
+        "puntomuerto poketipos-row"
+        "poketipos-col poke-tabla";
+    grid-template-rows: 1fr max-content;
+    grid-template-columns: 1fr max-content;
+    align-items: end;
+    justify-items: end;
+    user-select: none;
+    padding: 5px;
+}
+.poke-title {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(18, 45px);
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Spartan', sans-serif;
+}
+.poke-title > div {
+    border: 2px solid hsl(0, 0%, 15%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.poketipo-row {
+    grid-area: poketipos-row;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+}
+.poketipo-col {
+    grid-area: poketipos-col;
+}
+#root {
+    grid-area: poke-tabla;
+    display: grid;
+    background-color: hsl(0, 0%, 15%);
+    grid-template-columns:repeat(18, 45px) ;
+    grid-template-rows:repeat(18, 45px) ;
+    width: max-content;
+    height: max-content;
+}
+
+#root > div {
+    font-weight: bold;
+    border: 1px solid hsl(0, 0%, 15%);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(50%);
+}
+.hover {
+    filter: brightness(100%) !important;
+}
