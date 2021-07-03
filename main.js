@@ -44,23 +44,29 @@ function appendCells() {
     }
 }
 function highlightOnHover(event) {
-    const divs = root.children;
-    Array.from(divs).forEach(ele => {
+    let [row, col] = event.target.classList.values();
+    [row, col] = [row.split('-')[1], col.split('-')[1]];
+    let eleRow = document.querySelectorAll(`.row-${row}`);
+    let eleCol = document.querySelectorAll(`.col-${col}`);
+    eleRow = Array.from(eleRow).filter(ele => +ele.classList.item(1).split('-')[1] <= col ).forEach(ele => ele.classList.add('hover'));
+    eleCol = Array.from(eleCol).filter(ele => +ele.classList.item(0).split('-')[1] <= row ).forEach(ele => ele.classList.add('hover'));
+/*     eleRow.forEach(ele => {
+        const pos = [...ele.classList.values()];
+        if (+pos[1].split('-')[1] <= +col) ele.classList.add('hover');
+    });
+    eleCol.forEach(ele => {
+        const pos = [...ele.classList.values()];
+        if (+pos[0].split('-')[1] <= +row) ele.classList.add('hover');
+    }); */
+/*     Array.from(divs).forEach(ele => {
         [...ele.classList].some(val => event.target.classList.contains(val)) && ele.classList.add('hover');
         //[...event.target.classList.values()].forEach(val => { if (ele.classList.contains(val)) ele.classList.add('hover') });
         //if ([...event.target.classList.values()].some(value => [...ele.classList.values()].includes(value))) ele.classList.add('hover');
-    });
+    }); */
 }
-function removeHighlight(event) {
-    const divs = root.children;
-    Array.from(divs).forEach(ele => {
-        const objetiveClass = Array.from(event.target.classList);
-        const elementClasses = Array.from(ele.classList);
-        if (elementClasses.includes('hover')) elementClasses.splice(elementClasses.indexOf('hover'), elementClasses.length);
-        if (!objetiveClass.some(value => elementClasses.includes(value))) {
-            ele.classList.remove('hover');
-        }
-    });
+function removeHighlight() {
+    const ele = document.querySelectorAll('.hover');
+    ele.forEach(i => i.classList.remove('hover'));
 }
 appendCells();
 root.addEventListener('mousemove', (event) => {
